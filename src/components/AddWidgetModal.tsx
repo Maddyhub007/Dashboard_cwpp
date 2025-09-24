@@ -42,7 +42,8 @@ const AddWidgetModal: React.FC<AddWidgetModalProps> = ({
     // Add selected widgets
     Object.entries(selectedWidgets).forEach(([key, isSelected]) => {
       if (isSelected) {
-        const [categoryId, widgetId] = key.split('-');
+        const [categoryId, ...rest] = key.split('-');
+        const widgetId = rest.join('-');
         const widget = dashboardData.availableWidgets[categoryId]?.find(w => w.id === widgetId);
         if (widget) {
           onAddWidget(categoryId, widget);
